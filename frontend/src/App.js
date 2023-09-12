@@ -1,16 +1,22 @@
 import { Box } from "@mui/material";
 import "./App.css";
 import Header from "./components/Header/Header";
-import Home from "./components/Home/Home";
-
+import Home from "./pages/Home/Home";
+import ContextProvider from "./context/ContextProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
-    <div>
-      <Header />
-      <Box style={{ marginTop: 54 }}>
-        <Home />
-      </Box>
-    </div>
+    <>
+      <ContextProvider>
+        <Header />
+        <Box style={{ marginTop: 54 }}>
+          <Home />
+        </Box>
+      </ContextProvider>
+      <ToastContainer position="top-right" />
+      <ToastContainer />
+    </>
   );
 }
 

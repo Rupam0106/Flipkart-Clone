@@ -1,5 +1,5 @@
 import React from "react";
-import { InputBase, List, Box, styled } from "@mui/material";
+import { InputBase, Box, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SearchContainer = styled(Box)`
@@ -14,13 +14,6 @@ const SearchIconWrapper = styled(Box)`
   padding: 5px;
   display: flex;
   color: blue;
-`;
-
-const ListWrapper = styled(List)`
-  position: absolute;
-  color: #000;
-  background: #ffffff;
-  margin-top: 36px;
 `;
 
 const InputSearchBase = styled(InputBase)`
