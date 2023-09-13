@@ -1,6 +1,11 @@
-import React from "react";
-import { InputBase, Box, styled } from "@mui/material";
+import { useState, useEffect } from "react";
+
 import SearchIcon from "@mui/icons-material/Search";
+import { InputBase, List, ListItem, Box, styled } from "@mui/material";
+
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchProducts } from "../../features/product/ProductSlice";
 
 const SearchContainer = styled(Box)`
   border-radius: 2px;
@@ -9,11 +14,19 @@ const SearchContainer = styled(Box)`
   background-color: #fff;
   display: flex;
 `;
+
 const SearchIconWrapper = styled(Box)`
   margin-left: auto;
   padding: 5px;
   display: flex;
   color: blue;
+`;
+
+const ListWrapper = styled(List)`
+  position: absolute;
+  color: #000;
+  background: #ffffff;
+  margin-top: 36px;
 `;
 
 const InputSearchBase = styled(InputBase)`
@@ -23,15 +36,50 @@ const InputSearchBase = styled(InputBase)`
 `;
 
 const Search = () => {
+  const [text, setText] = useState();
+  const [open, setOpen] = useState(true);
+
+  const getText = (text) => {
+    setText(text);
+    setOpen(false);
+  };
+
+  const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <SearchContainer>
       <InputSearchBase
         placeholder="Search for products, brands and more"
         inputProps={{ "aria-label": "search" }}
+        onChange={(e) => getText(e.target.value)}
       />
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
+      {text && (
+        <ListWrapper hidden={open}>
+          {products
+            .filter((product) =>
+              product.title.longTitle.toLowerCase().includes(text.toLowerCase())
+            )
+            .map((product) => (
+              <ListItem>
+                <Link
+                  to={`/product/${product.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  onClick={() => setOpen(true)}
+                >
+                  {product.title.longTitle}
+                </Link>
+              </ListItem>
+            ))}
+        </ListWrapper>
+      )}
     </SearchContainer>
   );
 };

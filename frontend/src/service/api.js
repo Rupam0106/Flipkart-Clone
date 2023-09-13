@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:8000/";
+const url = "http://localhost:8000";
 
 export const authenticateLogin = async (user) => {
   try {
@@ -37,7 +37,7 @@ export const payUsingPaytm = async (data) => {
 };
 
 export default function useFetch(url_take) {
-  const [data, setData] = useState(null);
+  const [product, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +45,7 @@ export default function useFetch(url_take) {
     (async function () {
       try {
         setLoading(true);
-        const response = await axios.get(`${url + url_take}`);
+        const response = await axios.get(`http://localhost:8000/product/${url_take}`);
         setData(response.data);
       } catch (err) {
         setError(err);
@@ -55,5 +55,5 @@ export default function useFetch(url_take) {
     })();
   }, [url_take]);
 
-  return { data, error, loading };
+  return { product, error, loading };
 }
