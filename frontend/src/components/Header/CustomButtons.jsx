@@ -4,7 +4,7 @@ import { Box, Typography, Badge, Button, styled } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
-import { LoginContext } from "../../context/ContextProvider";
+import { LoginContext } from "../../hooks/ContextProvider";
 
 import Profile from "./Profile";
 import LoginDialog from "../Login/LoginDialog";

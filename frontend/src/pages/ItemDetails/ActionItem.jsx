@@ -3,7 +3,7 @@ import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/CartSlice";
-import useFetch from "../../service/api";
+import useFetch from "../../services/userService";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
@@ -26,11 +26,9 @@ const StyledButton = styled(Button)`
   color: #fff;
 `;
 
-
-
 const ActionItem = ({ product }) => {
-  const data  = useFetch(`${product.id}`);
-  console.log(data)
+  const data = useFetch(`${product.id}`);
+  console.log(data);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const buyNow = async () => {};

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useFetch from "../../service/api";
-import Loader from "../../components/Loader/Loader";
+import useFetch from "../../services/userService";
 import { styled, Box, Typography, Grid } from "@mui/material";
 import ProductDetail from "./ProductDetail";
 import ActionItem from "./ActionItem";
@@ -28,14 +27,10 @@ const RightContainer = styled(Grid)`
 const DetailView = () => {
   const { id } = useParams();
 
-  const { product, error, loading } = useFetch(`${id}`);
 
-  if (!error && loading) {
-    return <Loader />;
-  }
-  if (!loading && error) {
-    return <h3>{error.message}</h3>;
-  }
+    const { product } = useFetch(id);
+    console.log(product);
+
 
   return (
     <Component>

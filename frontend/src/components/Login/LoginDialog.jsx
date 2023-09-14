@@ -8,7 +8,10 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { authenticateLogin, authenticateSignup } from "../../service/api";
+import {
+  authenticateLogin,
+  authenticateSignup,
+} from "../../services/userService";
 
 const Component = styled(DialogContent)`
   height: 70vh;

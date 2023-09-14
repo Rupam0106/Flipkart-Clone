@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { STATUS } from "../constants/Status";
-const base_url = 'http://localhost:8000';
+import axios from "axios";
+import { PRODUCTS_URL } from "../../constant/urls";
 
 const initialState = {
   status: "",
@@ -28,7 +28,7 @@ const productSlice = createSlice({
 
 //fetching product using build in thunk on toolkit
 export const fetchProducts = createAsyncThunk("fetch/products", async () => {
-  const data = await axios.get(`${base_url}/products`).then((res) => res.data);
+  const data = await axios.get(PRODUCTS_URL).then((res) => res.data);
   return data;
 });
 
