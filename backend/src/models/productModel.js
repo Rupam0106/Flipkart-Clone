@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     title: {
-      type: String,
+      type: Object,
       required: [true, "Please Enter title of the Product"],
       trim: true,
     },
@@ -13,12 +13,24 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     price: {
-      type: Number,
+      type: Object,
       required: [true, "Please Enter Price of the Product"],
     },
-    productImage: {
+    url: {
       type: String,
       required: [true, "Please Provide Product Image"],
+    },
+    detailUrl: {
+      type: String,
+      required: [true, "Please Provide Product Image"],
+    },
+    discount: {
+      type: String,
+      required: [true, "Please Provide Product discount"],
+    },
+    tagline: {
+      type: String,
+      required: [true, "Please Provide Product tagline"],
     },
     stock: {
       type: Number,

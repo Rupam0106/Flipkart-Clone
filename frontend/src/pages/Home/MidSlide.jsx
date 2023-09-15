@@ -33,7 +33,7 @@ const MidSlide = ({ products }) => {
     <Component>
       <LeftComponent>
         <Slide
-          data={products}
+          data={products && products}
           title="Deals of the Day"
           timer={true}
           multi={true}

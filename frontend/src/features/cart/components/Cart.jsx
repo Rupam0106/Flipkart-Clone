@@ -4,7 +4,7 @@ import { Box, Typography, Button, Grid, styled } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../features/cart/CartSlice";
+import { addToCart, removeFromCart } from "../CartSlice";
 
 import TotalView from "./TotalView";
 import EmptyCart from "./EmptyCart";

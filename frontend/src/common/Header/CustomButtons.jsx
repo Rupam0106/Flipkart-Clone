@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { LoginContext } from "../../hooks/ContextProvider";
 
 import Profile from "./Profile";
-import LoginDialog from "../Login/LoginDialog";
+import LoginDialog from "../../pages/LoginDialog";
 
 const Container = styled(Link)(({ theme }) => ({
   display: "flex",

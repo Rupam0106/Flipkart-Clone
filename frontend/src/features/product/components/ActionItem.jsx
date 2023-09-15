@@ -1,9 +1,10 @@
 import { Button, Box, styled } from "@mui/material";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../features/cart/CartSlice";
-import useFetch from "../../services/userService";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../cart/CartSlice";
+import { fetchProductByIdAsync, selectProductById } from "../ProductSlice";
+import { useEffect } from "react";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
@@ -27,10 +28,16 @@ const StyledButton = styled(Button)`
 `;
 
 const ActionItem = ({ product }) => {
-  const data = useFetch(`${product.id}`);
-  console.log(data);
-  const navigate = useNavigate();
+  const data= useSelector(selectProductById);
+  console.log(product)
+  const { id } = useParams();
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchProductByIdAsync(id));
+  }, [dispatch, id]);
+
+  const navigate = useNavigate();
   const buyNow = async () => {};
 
   const addItemToCart = () => {

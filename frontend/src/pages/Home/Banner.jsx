@@ -43,7 +43,7 @@ const Banner = () => {
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
     >
-      {bannerData.map((image) => (
+      {bannerData?.map((image) => (
         <Image key={image.id} src={image.url} alt="banner" id={image.id} />
       ))}
     </Carousel>

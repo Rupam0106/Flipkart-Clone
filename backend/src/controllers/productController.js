@@ -1,22 +1,11 @@
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ErrorHandler = require("../utils/errorHandler");
 const productModel = require("../models/productModel");
-const aws = require("../Aws/aws.js");
 
 //createProduct
 exports.createProduct = catchAsyncError(async (req, res, next) => {
   let user = req.user.id;
-  let productImage = await aws.uploadFile(req.files[0]);
-
-  const { title, description, price, stock } = req.body;
-  const product = await productModel.create({
-    user,
-    title,
-    description,
-    price,
-    productImage,
-    stock,
-  });
+  const product = await productModel.create(req.body);
 
   res.status(201).json({
     success: true,
@@ -74,7 +63,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 //search product
 exports.searchProduct = catchAsyncError(async (req, res, next) => {
   const searchRegex = new RegExp(req.params.searchTerm, "i");
-  if(!searchRegex){
+  if (!searchRegex) {
     return next(
       new ErrorHandler(`No product exist : ${req.params.searchTerm}`)
     );

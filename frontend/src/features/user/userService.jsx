@@ -1,30 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import {
   LOGIN_USER_URL,
   LOGOUT_URL,
   REGISTER_USER_URL,
-} from "../constant/urls";
-import { getProductById } from "./productService";
+} from "../../constant/urls";
 
-export default function useFetch(url) {
-  const [product, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const response = getProductById(url);
-        console.log(response)
-        setData(response.data);
-      } catch (err) {
-        setError(err);
-      }
-    })();
-  }, [url]);
-
-  return { product, error };
-}
 
 export const getUser = () =>
   localStorage.getItem("user")

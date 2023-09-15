@@ -11,7 +11,7 @@ import {
 import {
   authenticateLogin,
   authenticateSignup,
-} from "../../services/userService";
+} from "../features/user/userService";
 
 const Component = styled(DialogContent)`
   height: 70vh;

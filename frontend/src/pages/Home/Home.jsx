@@ -7,7 +7,7 @@ import Slide from "./Slide";
 import { Box, styled } from "@mui/material";
 import MidSlide from "./MidSlide";
 import MidSection from "./MidSection";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../common/Loader/Loader";
 
 const Component = styled(Box)`
   padding: 20px 10px;
@@ -15,18 +15,18 @@ const Component = styled(Box)`
 `;
 
 const Home = () => {
-  
+  // const [products, setProduct] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
-    // eslint-disable-next-line
-  }, []);
-const { products } = useSelector((state) => state.products);
-  console.log(products)
+  }, [dispatch]);
+
+  const products = useSelector((state) => state.products.products);
+
   return (
-    <><Loader/>
+    <>
+      <Loader />
       <NavBar />
-      
       <Component>
         <Banner />
         <MidSlide products={products.products} />

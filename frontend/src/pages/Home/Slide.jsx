@@ -108,7 +108,7 @@ const MultiSlide = ({ data, timer, title }) => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        {data?.map((temp) => (
+        {data && data.map((temp) => (
           <Link to={`product/${temp._id}`} style={{ textDecoration: "none" }}>
             <Box textAlign="center" style={{ padding: "25px 15px" }}>
               <Image src={temp?.url} />
@@ -128,7 +128,7 @@ const MultiSlide = ({ data, timer, title }) => {
 };
 
 const Slide = (props) => {
-  return <>{props.multi === true && <MultiSlide {...props} />}</>;
+  return <>{props && props.multi === true && <MultiSlide {...props} />}</>;
 };
 
 export default Slide;
