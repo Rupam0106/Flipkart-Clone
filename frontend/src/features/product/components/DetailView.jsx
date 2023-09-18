@@ -26,19 +26,13 @@ const RightContainer = styled(Grid)`
   }
 `;
 const DetailView = () => {
-  
-  const product= useSelector(selectProductById);
-  console.log(product)
+  const product = useSelector(selectProductById);
   const { id } = useParams();
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchProductByIdAsync(id));
   }, [dispatch, id]);
-
-  
- 
-  
 
   return (
     <Component>

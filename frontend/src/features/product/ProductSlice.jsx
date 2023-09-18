@@ -55,7 +55,7 @@ export const fetchProductByIdAsync = createAsyncThunk(
 
 export const { clearSelectedProduct } = productSlice.actions;
 
-export const selectAllProducts = (state) => state.products.products;
+export const selectAllProducts = (state) => state.products?.products;
 export const selectProductById = (state) => state.products.selectedProduct?.product;
 export const selectProductListStatus = (state) => state.products.status;
 export default productSlice.reducer;

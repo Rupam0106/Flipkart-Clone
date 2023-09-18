@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./NavBar";
 import Banner from "./Banner";
-import { fetchProducts } from "../../features/product/ProductSlice";
+import { fetchProducts, selectAllProducts } from "../../features/product/ProductSlice";
 import Slide from "./Slide";
 import { Box, styled } from "@mui/material";
 import MidSlide from "./MidSlide";
@@ -15,13 +15,11 @@ const Component = styled(Box)`
 `;
 
 const Home = () => {
-  // const [products, setProduct] = useState([]);
+  const products = useSelector(selectAllProducts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-  const products = useSelector((state) => state.products.products);
 
   return (
     <>

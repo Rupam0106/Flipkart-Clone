@@ -5,7 +5,6 @@ import {
   REGISTER_USER_URL,
 } from "../../constant/urls";
 
-
 export const getUser = () =>
   localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
@@ -13,8 +12,9 @@ export const getUser = () =>
 
 export const authenticateLogin = async (email, password) => {
   try {
+    console.log(password);
     const data = await axios.post(LOGIN_USER_URL, { email, password });
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("user", JSON.stringify(data.data));
     return data;
   } catch (error) {
     console.log(error);
@@ -31,7 +31,11 @@ export const authenticateSignup = async (registerData) => {
   }
 };
 
-export const logout = async () => {
-  await axios.get(LOGOUT_URL);
-  localStorage.removeItem("user");
+export const logoutUser = async () => {
+  try {
+    await axios.get(LOGOUT_URL);
+    localStorage.removeItem("user");
+  } catch (error) {
+    console.log(error);
+  }
 };

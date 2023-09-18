@@ -11,7 +11,6 @@ import Cart from "./features/cart/components/Cart";
 import { useEffect } from "react";
 import setLoadingInterceptor from "./interceptors/loadingInterceptor";
 import { useLoading } from "./hooks/useLoading";
-import Loader from "./common/Loader/Loader";
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
     <>
       <ContextProvider>
         <Header />
-        <Loader />
         <Box style={{ marginTop: 54 }}>
           <Routes>
             <Route path="/" element={<Home />} />

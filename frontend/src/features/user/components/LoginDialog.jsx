@@ -11,7 +11,7 @@ import {
 import {
   authenticateLogin,
   authenticateSignup,
-} from "../features/user/userService";
+} from "../userService";
 
 const Component = styled(DialogContent)`
   height: 70vh;
@@ -87,17 +87,15 @@ const Image = styled(Box)`
 `;
 
 const loginInitialValues = {
-  username: "",
+  email: "",
   password: "",
 };
 
 const signupInitialValues = {
-  firstname: "",
-  lastname: "",
-  username: "",
+  name: "",
   email: "",
   password: "",
-  phone: "",
+  address: "",
 };
 
 const accountInitialValues = {
@@ -132,12 +130,13 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
   };
 
   const loginUser = async () => {
-    let response = await authenticateLogin(login);
+    console.log(login.email)
+    let response = await authenticateLogin(login.email,login.password);
     if (!response) showError(true);
     else {
       showError(false);
       handleClose();
-      setAccount(login.username);
+      setAccount(login.email);
     }
   };
 
@@ -145,7 +144,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
     let response = await authenticateSignup(signup);
     if (!response) return;
     handleClose();
-    setAccount(signup.username);
+    setAccount(signup.email);
   };
 
   const toggleSignup = () => {
@@ -176,10 +175,10 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
               <TextField
                 variant="standard"
                 onChange={(e) => onValueChange(e)}
-                name="username"
-                label="Enter Username"
+                name="email"
+                label="Enter Email"
               />
-              {error && <Error>Please enter valid Username/Password</Error>}
+              {error && <Error>Please enter valid Email/Password</Error>}
               <TextField
                 variant="standard"
                 onChange={(e) => onValueChange(e)}
@@ -199,24 +198,14 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
             </Wrapper>
           ) : (
             <Wrapper>
+              
               <TextField
                 variant="standard"
                 onChange={(e) => onInputChange(e)}
-                name="firstname"
-                label="Enter Firstname"
+                name="name"
+                label="Enter Name"
               />
-              <TextField
-                variant="standard"
-                onChange={(e) => onInputChange(e)}
-                name="lastname"
-                label="Enter Lastname"
-              />
-              <TextField
-                variant="standard"
-                onChange={(e) => onInputChange(e)}
-                name="username"
-                label="Enter Username"
-              />
+              
               <TextField
                 variant="standard"
                 onChange={(e) => onInputChange(e)}
@@ -232,8 +221,8 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
               <TextField
                 variant="standard"
                 onChange={(e) => onInputChange(e)}
-                name="phone"
-                label="Enter Phone"
+                name="address"
+                label="Enter Address"
               />
               <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
             </Wrapper>

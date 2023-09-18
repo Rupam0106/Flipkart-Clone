@@ -29,7 +29,6 @@ const StyledButton = styled(Button)`
 
 const ActionItem = ({ product }) => {
   const data= useSelector(selectProductById);
-  console.log(product)
   const { id } = useParams();
   const dispatch = useDispatch();
   

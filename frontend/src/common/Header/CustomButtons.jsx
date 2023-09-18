@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { LoginContext } from "../../hooks/ContextProvider";
 
 import Profile from "./Profile";
-import LoginDialog from "../../pages/LoginDialog";
+import LoginDialog from "../../features/user/components/LoginDialog";
 
 const Container = styled(Link)(({ theme }) => ({
   display: "flex",
@@ -57,7 +57,7 @@ const LoginButton = styled(Button)(({ theme }) => ({
 const CustomButtons = () => {
   const [open, setOpen] = useState(false);
   const { account, setAccount } = useContext(LoginContext);
-
+console.log(account)
   const openDialog = () => {
     setOpen(true);
   };
