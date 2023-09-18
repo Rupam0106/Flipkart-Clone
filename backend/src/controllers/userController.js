@@ -2,20 +2,19 @@ const catchAsyncError = require("../middlewares/catchAsyncError");
 const userModel = require("../models/userModel");
 const ErrorHandler = require("../utils/errorHandler");
 const { sendToken } = require("../utils/jwtToken");
-const aws = require("../Aws/aws.js");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 //register User
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { name, email, password,avatar } = req.body;
+  const { name, email, password,address } = req.body;
 
   const user = await userModel.create({
     name,
     email,
     password,
-    avatar,
+    address,
   });
 
   sendToken(user, 201, res);
