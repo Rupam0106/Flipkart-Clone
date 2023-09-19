@@ -2,9 +2,9 @@ import { Button, Box, styled } from "@mui/material";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../cart/CartSlice";
 import { fetchProductByIdAsync, selectProductById } from "../ProductSlice";
 import { useEffect } from "react";
+import { addToCartAsync } from "../../cart/CartSlice";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
@@ -40,7 +40,7 @@ const ActionItem = ({ product }) => {
   const buyNow = async () => {};
 
   const addItemToCart = () => {
-    dispatch(addToCart(data));
+    dispatch(addToCartAsync(data));
     navigate("/cart");
   };
 

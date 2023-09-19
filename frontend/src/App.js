@@ -11,8 +11,21 @@ import Cart from "./features/cart/components/Cart";
 import { useEffect } from "react";
 import setLoadingInterceptor from "./interceptors/loadingInterceptor";
 import { useLoading } from "./hooks/useLoading";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemsByUserIdAsync } from "./features/cart/CartSlice";
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
+import { selectLoggedInUser } from "./features/auth/authSlice";
 
 function App() {
+  // const dispatch = useDispatch();
+  // const user = useSelector(selectLoggedInUser);
+  // useEffect(() => {
+  //   if (user) {
+  //     dispatch(fetchItemsByUserIdAsync());
+  //     // we can get req.user by token on backend so no need to give in front-end
+  //     dispatch(fetchLoggedInUserAsync());
+  //   }
+  // }, [dispatch, user]);
 
   const { showLoading, hideLoading } = useLoading();
   useEffect(() => {

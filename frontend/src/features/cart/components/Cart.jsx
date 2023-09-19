@@ -4,7 +4,7 @@ import { Box, Typography, Button, Grid, styled } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../CartSlice";
+import { addToCartAsync } from "../CartSlice";
 
 import TotalView from "./TotalView";
 import EmptyCart from "./EmptyCart";
@@ -55,18 +55,18 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (cartItems && id !== cartItems.id) dispatch(addToCart(id));
+    if (cartItems && id !== cartItems.id) dispatch(addToCartAsync(id));
   }, [dispatch, cartItems, id]);
 
   const removeItemFromCart = (id) => {
-    dispatch(removeFromCart(id));
+    
   };
 
   const buyNow = async () => {};
 
   return (
     <>
-      {cartItems.length ? (
+      {cartItems?.length ? (
         <Component container>
           <LeftComponent item lg={9} md={9} sm={12} xs={12}>
             <Header>
