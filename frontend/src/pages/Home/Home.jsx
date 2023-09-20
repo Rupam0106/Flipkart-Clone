@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./NavBar";
 import Banner from "./Banner";
-import { fetchProducts, selectAllProducts } from "../../features/product/ProductSlice";
+import { fetchBrandsAsync, fetchCategoriesAsync, selectAllProducts } from "../../features/product/ProductSlice";
 import Slide from "./Slide";
 import { Box, styled } from "@mui/material";
 import MidSlide from "./MidSlide";
@@ -15,10 +15,12 @@ const Component = styled(Box)`
 `;
 
 const Home = () => {
-  const products = useSelector(selectAllProducts);
   const dispatch = useDispatch();
+  const {data} = useSelector(selectAllProducts);
+console.log(data)
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchBrandsAsync());
+    dispatch(fetchCategoriesAsync());
   }, [dispatch]);
 
   return (
@@ -27,32 +29,32 @@ const Home = () => {
       <NavBar />
       <Component>
         <Banner />
-        <MidSlide products={products.products} />
+        {/* <MidSlide products={data} /> */}
         <MidSection />
-        <Slide
-          data={products.products}
+        {/* <Slide
+          data={data}
           title="Discounts for You"
           timer={false}
           multi={true}
-        />
-        <Slide
-          data={products.products}
+        /> */}
+        {/* <Slide
+          data={products}
           title="Suggested Items"
           timer={false}
           multi={true}
         />
         <Slide
-          data={products.products}
+          data={products}
           title="Top Selection"
           timer={false}
           multi={true}
         />
         <Slide
-          data={products.products}
+          data={products}
           title="Recommended Items"
           timer={false}
           multi={true}
-        />
+        /> */}
       </Component>
     </>
   );

@@ -71,6 +71,7 @@ export const resetPasswordAsync = createAsyncThunk(
     } catch (error) {
       console.log(error);
       return rejectWithValue(error);
+
     }
   }
 );
@@ -153,5 +154,7 @@ export const selectError = (state) => state.auth.error;
 export const selectUserChecked = (state) => state.auth.userChecked;
 export const selectMailSent = (state) => state.auth.mailSent;
 export const selectPasswordReset = (state) => state.auth.passwordReset;
+
+// export const { } = authSlice.actions;
 
 export default authSlice.reducer;

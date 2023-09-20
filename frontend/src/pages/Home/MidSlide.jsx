@@ -30,19 +30,23 @@ const MidSlide = ({ products }) => {
     "https://rukminim1.flixcart.com/flap/464/708/image/633789f7def60050.jpg?q=70";
 
   return (
-    <Component>
-      <LeftComponent>
-        <Slide
-          data={products && products}
-          title="Deals of the Day"
-          timer={true}
-          multi={true}
-        />
-      </LeftComponent>
-      <RightComponent>
-        <img src={adURL} alt="product" style={{ width: 217 }} />
-      </RightComponent>
-    </Component>
+    <>
+      {products && (
+        <Component>
+          <LeftComponent>
+            <Slide
+              data={products && products}
+              title="Deals of the Day"
+              timer={true}
+              multi={true}
+            />
+          </LeftComponent>
+          <RightComponent>
+            <img src={products.images} alt="product" style={{ width: 217 }} />
+          </RightComponent>
+        </Component>
+      )}
+    </>
   );
 };
 

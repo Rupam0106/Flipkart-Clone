@@ -1,38 +1,85 @@
 import axios from "axios";
-import {
-  DELETE_PRODUCT_BY_ID_URL,
-  PERODUCT_BY_SEARCH_URL,
-  PRODUCTS_URL,
-  PRODUCT_BY_ID_URL,
-  UPDATE_PEODUCT_BY_ID_URL,
-} from "../../constant/urls";
 
-export const getAllProduct = async () => {
+export function fetchAllProduct() {
   return new Promise(async (resolve) => {
-    const { data } = await axios.get(PRODUCTS_URL);
-    resolve(data);
+    const data = await axios.get('/products/');
+    resolve({ data });
   });
-};
+}
 
-export const getProductById = async (productId) => {
+export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const { data } = await axios.get(PRODUCT_BY_ID_URL + productId);
-    resolve(data);
+    const data = await axios.get('/products/' + id);
+    resolve({ data });
   });
-};
+}
 
-export const searchProduct = async (searchTerm) => {
-  const { data } = await axios.get(PERODUCT_BY_SEARCH_URL + searchTerm);
-  return data;
-};
+export function createProduct(product) {
+  return new Promise(async (resolve) => {
+    const data = await axios.post('/products/', {
+      method: 'POST',
+      body: JSON.stringify(product),
+      headers: { 'content-type': 'application/json' },
+    });
+    resolve({ data });
+  });
+}
 
+export function updateProduct(update) {
+  return new Promise(async (resolve) => {
+    const response = await axios.patch(
+      '/products/' + update.id,
+      {
+        method: 'PATCH',
+        body: JSON.stringify(update),
+        headers: { 'content-type': 'application/json' },
+      }
+    );
+    const data = await response.json();
+    resolve({ data });
+  });
+}
 
-export const updateProductById = async (productId) => {
-  const data = await axios.get(UPDATE_PEODUCT_BY_ID_URL + productId);
-  return data;
-};
+export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
-export const deleteProductById = async (productId) => {
-  const data = await axios.get(DELETE_PRODUCT_BY_ID_URL + productId);
-  return data;
-};
+  let queryString = '';
+  for (let key in filter) {
+    const categoryValues = filter[key];
+    if (categoryValues.length) {
+      queryString += `${key}=${categoryValues}&`;
+    }
+  }
+  for (let key in sort) {
+    queryString += `${key}=${sort[key]}&`;
+  }
+  for (let key in pagination) {
+    queryString += `${key}=${pagination[key]}&`;
+  }
+  if(admin){
+    queryString += `admin=true`;
+  }
+
+  return new Promise(async (resolve) => {
+    const response = await axios.get(
+      '/products?' + queryString
+    );
+    const data = await response.json();
+    const totalItems = await response.headers.get('X-Total-Count');
+    resolve({ data: { products: data, totalItems: +totalItems } });
+  });
+}
+
+export function fetchCategories() {
+  return new Promise(async (resolve) => {
+    const data = await axios.get('/categories');
+   
+    resolve({ data });
+  });
+}
+
+export function fetchBrands() {
+  return new Promise(async (resolve) => {
+    const data = await axios.get('/brands');
+    resolve({ data });
+  });
+}

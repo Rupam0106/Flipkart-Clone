@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Typography, Menu, MenuItem, Box, styled } from "@mui/material";
 import { PowerSettingsNew } from "@mui/icons-material";
-import { logoutUser } from "../../features/user/userService";
 
 const Component = styled(Menu)`
   margin-top: 5px;
@@ -26,8 +25,7 @@ const Profile = ({ account, setAccount }) => {
   };
 
   const logout = async () => {
-    await logoutUser();
-    setAccount("");
+   // TODO : logout feature implementation
   };
 
   return (

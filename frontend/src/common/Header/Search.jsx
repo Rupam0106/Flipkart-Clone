@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { InputBase, List, ListItem, Box, styled } from "@mui/material";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../../features/product/ProductSlice";
 
 const SearchContainer = styled(Box)`
   border-radius: 2px;
@@ -43,13 +42,7 @@ const Search = () => {
     setText(text);
     setOpen(false);
   };
-
-  const { products } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-    // eslint-disable-next-line
-  }, []);
+  const  products  = useSelector((state) => state.products);
 
   return (
     <SearchContainer>

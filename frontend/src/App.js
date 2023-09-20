@@ -12,25 +12,32 @@ import { useEffect } from "react";
 import setLoadingInterceptor from "./interceptors/loadingInterceptor";
 import { useLoading } from "./hooks/useLoading";
 import { useDispatch, useSelector } from "react-redux";
+import { checkAuthAsync, selectLoggedInUser } from "./features/auth/authSlice";
 import { fetchItemsByUserIdAsync } from "./features/cart/CartSlice";
 import { fetchLoggedInUserAsync } from "./features/user/userSlice";
-import { selectLoggedInUser } from "./features/auth/authSlice";
+import { fetchAllProductAsync } from "./features/product/ProductSlice";
 
 function App() {
-  // const dispatch = useDispatch();
-  // const user = useSelector(selectLoggedInUser);
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+  // const userChecked = useSelector(selectUserChecked);
+
   // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchItemsByUserIdAsync());
-  //     // we can get req.user by token on backend so no need to give in front-end
-  //     dispatch(fetchLoggedInUserAsync());
-  //   }
-  // }, [dispatch, user]);
+  //   dispatch(checkAuthAsync());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    // dispatch(fetchItemsByUserIdAsync());
+    dispatch(fetchAllProductAsync());
+    // we can get req.user by token on backend so no need to give in front-end
+    // dispatch(fetchLoggedInUserAsync());
+  }, [dispatch]);
 
   const { showLoading, hideLoading } = useLoading();
   useEffect(() => {
     setLoadingInterceptor({ showLoading, hideLoading });
   }, [hideLoading, showLoading]);
+
   return (
     <>
       <ContextProvider>
@@ -43,6 +50,7 @@ function App() {
           </Routes>
         </Box>
       </ContextProvider>
+
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

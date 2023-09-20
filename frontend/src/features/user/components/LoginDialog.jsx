@@ -8,10 +8,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import {
-  authenticateLogin,
-  authenticateSignup,
-} from "../userService";
+import { createUser } from "../../auth/authService";
 
 const Component = styled(DialogContent)`
   height: 70vh;
@@ -131,7 +128,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
 
   const loginUser = async () => {
     console.log(login.email)
-    let response = await authenticateLogin(login.email,login.password);
+    let response = await loginUser(login.email,login.password);
     if (!response) showError(true);
     else {
       showError(false);
@@ -141,7 +138,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
   };
 
   const signupUser = async () => {
-    let response = await authenticateSignup(signup);
+    let response = await createUser(signup);
     if (!response) return;
     handleClose();
     setAccount(signup.email);

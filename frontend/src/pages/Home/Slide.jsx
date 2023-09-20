@@ -108,20 +108,21 @@ const MultiSlide = ({ data, timer, title }) => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        {data && data.map((temp) => (
-          <Link to={`product/${temp._id}`} style={{ textDecoration: "none" }}>
-            <Box textAlign="center" style={{ padding: "25px 15px" }}>
-              <Image src={temp?.url} />
-              <Text style={{ fontWeight: 600, color: "#212121" }}>
-                {temp.title.shortTitle}
-              </Text>
-              <Text style={{ color: "green" }}>{temp.discount}</Text>
-              <Text style={{ color: "#212121", opacity: ".6" }}>
-                {temp.tagline}
-              </Text>
-            </Box>
-          </Link>
-        ))}
+        {data &&
+          data.map((temp) => (
+            <Link to={`product/${temp._id}`} style={{ textDecoration: "none" }}>
+              <Box textAlign="center" style={{ padding: "25px 15px" }}>
+                <Image src={temp?.url} />
+                <Text style={{ fontWeight: 600, color: "#212121" }}>
+                  {temp.title.shortTitle}
+                </Text>
+                <Text style={{ color: "green" }}>{temp.discount}</Text>
+                <Text style={{ color: "#212121", opacity: ".6" }}>
+                  {temp.tagline}
+                </Text>
+              </Box>
+            </Link>
+          ))}
       </Carousel>
     </Component>
   );
